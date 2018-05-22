@@ -1,3 +1,6 @@
+import time
+
+
 class HourDayRate(object):
     def __init__(self, day_of_week, start_time, end_time, price):
         self._day_of_week = day_of_week
@@ -36,3 +39,9 @@ class HourDayRate(object):
     @price.setter
     def price(self, price):
         self._price = price
+
+    def __str__(self):
+        return 'Day {} : StartTime {} : EndTime {} : Price {}'.format(self.day_of_week
+                                                                      , time.strftime('%H%M', self.start_time)
+                                                                      , time.strftime('%H%M', self.end_time)
+                                                                      , self.price)

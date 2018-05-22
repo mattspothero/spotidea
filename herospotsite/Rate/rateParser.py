@@ -2,6 +2,7 @@ import json
 import os
 import time
 
+from Rate.hourDayRate import HourDayRate
 from herospotsite import settings
 
 #      "days": "mon,tues,wed,thurs,fri,sat,sun"
@@ -38,17 +39,13 @@ class RateParser(object):
                 assert isinstance(r, dict)
                 times = r.get('times').split('-')
                 start_time = time.strptime(times[0], '%H%M')
-                print(start_time.tm_hour)
-                print(start_time.tm_min)
+                start_hr = start_time.tm_hour
                 end_time = time.strptime(times[1], '%H%M')
-                print(end_time.tm_hour)
-                print(end_time.tm_min)
+                end_hr = end_time.tm_hour + 1
                 price = r.get('price')
-                print(price)
                 days = r.get('days').split(',')
                 for d in days:
-                    week_indx = DAY_OF_WEEK.get(d.lower())
-                    print('{} : {} : {} : {} : {} : {} : {}'.format(d, week_indx, start_time.tm_hour, start_time.tm_min,
-                                                                    end_time.tm_hour
-                                                                    , end_time.tm_min, price))
-        return rate_list
+                    day_indx = DAY_OF_WEEK.get(d.lower())
+                    for hr_indx in range(start_hr, end_hr):
+                        self._rate_day_hr[day_indx][hr_indx] = HourDayRate(day_indx, start_time, end_time, price)
+        return self._rate_day_hr
