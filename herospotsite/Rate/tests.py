@@ -8,7 +8,8 @@ class RateTest(unittest.TestCase):
     def test_parse_json(self):
         rp = RateParser()
         result = rp.parse()
-        self.assertTrue(isinstance(result, dict))
+        self.assertTrue(isinstance(result, list))
+        self.assertTrue(len(result) == 2)
 
 
 if __name__ == '__main__':
