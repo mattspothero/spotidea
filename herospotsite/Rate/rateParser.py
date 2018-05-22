@@ -44,8 +44,12 @@ class RateParser(object):
                 end_hr = end_time.tm_hour + 1
                 price = r.get('price')
                 days = r.get('days').split(',')
+                print('everyday {}'.format(days))
                 for d in days:
                     day_indx = DAY_OF_WEEK.get(d.lower())
+                    print('day_indx {}'.format(day_indx))
                     for hr_indx in range(start_hr, end_hr):
                         self._rate_day_hr[day_indx][hr_indx] = HourDayRate(day_indx, start_time, end_time, price)
+                        if day_indx == 6:
+                            print(self._rate_day_hr[day_indx][hr_indx])
         return self._rate_day_hr
