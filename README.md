@@ -1,0 +1,1 @@
+# herospotsite at spotidea
