@@ -1,20 +1,21 @@
-import unittest
-from datetime import date
 from datetime import datetime
 
-from organizer.models import Reservation
+from django.test import TestCase
 
+from organizer.models import Reservation
+from organizer.serializers import ReservSerde
 
 # Create your tests here.
 
 
-class ReservationTest(unittest.TestCase):
+'''Run manage.py test organizer.tests'''
+
+
+class ReservationTest(TestCase):
 
     def test_reservation_serializr(self):
-        resvr = Reservation(start_time=datetime.utcnow(), stop_time=date.today().isoformat())
-        print(resvr)
+        resvr = Reservation(start_time=datetime.utcnow(), stop_time=datetime.utcnow())
+        resvr_serde = ReservSerde(resvr)
+        print('start time {}'.format(resvr_serde.data['start_time']))
+        print('stop time {}'.format(resvr_serde.data['stop_time']))
         self.assertTrue(False)
-
-
-if __name__ == '__main__':
-    unittest.main()

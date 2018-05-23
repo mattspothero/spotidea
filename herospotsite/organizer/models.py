@@ -1,10 +1,9 @@
 from __future__ import unicode_literals
 
-from datetime import datetime
+
 # Create your models here.
 class Reservation(object):
     def __init__(self, start_time, stop_time):
-        assert isinstance(start_time, datetime)
         self.start_parking = start_time
         self.stop_parking = stop_time
 
@@ -29,4 +28,5 @@ class Reservation(object):
         hour_start = self.start_time.hour
         min_start = self.start_time.minute
         iso_start = self.start_time.isoformat()
-        return 'start parking at {} \n {} \n {} \n {}'.format(iso_start, day_of_week, hour_start, min_start)
+        return 'start parking at {} \n day_of_week: {} \n hh: {} \n mm: {}'.format(iso_start, day_of_week, hour_start,
+                                                                                   min_start)

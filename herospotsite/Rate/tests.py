@@ -3,6 +3,8 @@ import unittest
 # Create your tests here.
 from Rate.rateParser import RateParser
 
+'''Run manage.py test Rate.tests'''
+
 
 class RateTest(unittest.TestCase):
 
