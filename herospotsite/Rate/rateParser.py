@@ -2,7 +2,7 @@ import json
 import os
 import time
 
-from rate.hourDayRate import HourDayRate
+from Rate.hourDayRate import HourDayRate
 from herospotsite import settings
 
 #      "days": "mon,tues,wed,thurs,fri,sat,sun"
@@ -29,7 +29,7 @@ class RateParser(object):
 
     def parse(self):
         rate_dir = os.path.join(settings.BASE_DIR, os.path.dirname(os.path.abspath(__file__)))
-        rate_file = os.path.join(rate_dir, 'rate.json')
+        rate_file = os.path.join(rate_dir, 'Rate.json')
         assert os.path.exists(rate_file)
         with open(rate_file, 'r') as f:
             rate_data = json.load(f)
