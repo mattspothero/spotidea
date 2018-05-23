@@ -2,7 +2,7 @@ import json
 import os
 import time
 
-from Rate.hourDayRate import HourDayRate
+from rate.hourDayRate import HourDayRate
 from herospotsite import settings
 
 #      "days": "mon,tues,wed,thurs,fri,sat,sun"

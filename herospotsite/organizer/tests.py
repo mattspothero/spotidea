@@ -8,6 +8,8 @@ from rest_framework.renderers import JSONRenderer
 from organizer.models import Reservation
 from organizer.serializers import ReservSerde
 
+import requests
+
 # Create your tests here.
 
 
@@ -17,12 +19,12 @@ from organizer.serializers import ReservSerde
 class ReservationTest(TestCase):
 
     def test_reservation_serializr(self):
+        url = 'http://127.0.0.1:8000/find/'
         resvr = Reservation(start_time=datetime.utcnow(), stop_time=datetime.utcnow())
         resvr_serde = ReservSerde(resvr)
-        print('start time {}'.format(resvr_serde.data['start_time']))
-        print('stop time {}'.format(resvr_serde.data['stop_time']))
         json = JSONRenderer().render(resvr_serde.data)
-        print(json)
+        response = requests.post(url=url, json=json)
+        print(response.text)
         stream = BytesIO(json)
         data = JSONParser().parse(stream)
         print(data)

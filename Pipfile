@@ -9,6 +9,7 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 pygments = "*"
+requests = "*"
 
 [dev-packages]
 

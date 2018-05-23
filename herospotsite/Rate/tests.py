@@ -1,9 +1,9 @@
 import unittest
 
 # Create your tests here.
-from Rate.rateParser import RateParser
+from rate.rateParser import RateParser
 
-'''Run manage.py test Rate.tests'''
+'''Run manage.py test rate.tests'''
 
 
 class RateTest(unittest.TestCase):
