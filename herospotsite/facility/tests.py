@@ -5,7 +5,7 @@ import unittest
 from facility.dayParser import DayParser
 from facility.facilityRateParser import FacilityRateParser
 from facility.timeParser import TimeParser
-from facility.dayTimesRate import DayTimesRate
+
 
 # Create your tests here.
 
@@ -27,6 +27,13 @@ class DayParserTest(unittest.TestCase):
         self.assertEqual(test_start_time, times.start_time)
         test_stop_time = time.strptime("1800", '%H%M')
         self.assertEqual(test_stop_time, times.stop_time)
+
+    def test_single_parse(self):
+        p1 = FacilityRateParser()
+        r1 = p1.rate_list
+        p2 = FacilityRateParser()
+        r2 = p2.rate_list
+        self.assertTrue(r1 == r2)
 
     def test_parse_file_path(self):
         parser = FacilityRateParser()

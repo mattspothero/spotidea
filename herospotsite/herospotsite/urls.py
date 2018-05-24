@@ -16,9 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from organizer.views import findspot
+from organizer.views import Calculator
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^find/$', findspot)
+    url(r'^find/$', Calculator.as_view())
 ]

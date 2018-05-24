@@ -1,14 +1,10 @@
-from datetime import datetime
-
+import maya
+import requests
 from django.test import TestCase
-from django.utils.six import BytesIO
-from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
 
 from organizer.models import Reservation
-from organizer.serializers import ReservSerde
-
-import requests
+from organizer.serializers import ReservationSerializr
 
 # Create your tests here.
 
@@ -18,14 +14,38 @@ import requests
 
 class ReservationTest(TestCase):
 
-    def test_reservation_serializr(self):
+    def test_wed_am(self):
         url = 'http://127.0.0.1:8000/find/'
-        resvr = Reservation(start_time=datetime.utcnow(), stop_time=datetime.utcnow())
-        resvr_serde = ReservSerde(resvr)
+        test_wed_7am = "2015-07-01T07:00:00Z"
+        test_wed_12pm = "2015-07-01T12:00:00Z"
+        wed_7am = maya.parse(test_wed_7am).datetime()
+        wed_12pm = maya.parse(test_wed_12pm).datetime()
+        resvr = Reservation(start_time=wed_7am, stop_time=wed_12pm)
+        resvr_serde = ReservationSerializr(resvr)
         json = JSONRenderer().render(resvr_serde.data)
         response = requests.post(url=url, json=json)
-        print(response.text)
-        stream = BytesIO(json)
-        data = JSONParser().parse(stream)
-        print(data)
-        self.assertTrue(False)
+        self.assertEqual(int(response.text), 1500)
+
+    def test_sat_am(self):
+        url = 'http://127.0.0.1:8000/find/'
+        test_wed_7am = "2015-07-04T07:00:00Z"
+        test_wed_12pm = "2015-07-04T12:00:00Z"
+        wed_7am = maya.parse(test_wed_7am).datetime()
+        wed_12pm = maya.parse(test_wed_12pm).datetime()
+        resvr = Reservation(start_time=wed_7am, stop_time=wed_12pm)
+        resvr_serde = ReservationSerializr(resvr)
+        json = JSONRenderer().render(resvr_serde.data)
+        response = requests.post(url=url, json=json)
+        self.assertEqual(int(response.text), 2000)
+
+    def test_sat_pm(self):
+        url = 'http://127.0.0.1:8000/find/'
+        test_wed_7am = "2015-07-04T07:00:00Z"
+        test_wed_12pm = "2015-07-04T20:00:00Z"
+        wed_7am = maya.parse(test_wed_7am).datetime()
+        wed_12pm = maya.parse(test_wed_12pm).datetime()
+        resvr = Reservation(start_time=wed_7am, stop_time=wed_12pm)
+        resvr_serde = ReservationSerializr(resvr)
+        json = JSONRenderer().render(resvr_serde.data)
+        response = requests.post(url=url, json=json)
+        self.assertTrue(response.content == '"unavailable"')
