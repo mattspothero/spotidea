@@ -1,15 +1,18 @@
 from facility.coroutil import coroutine
 from facility.dayTimesRate import DayTimesRate
 
+HOURS_DAY = 24
+DAYS_WEEK = 7
 
 
 class DayTimesRateBuilder(object):
     def __init__(self):
-        days = 7
-        hours = 24
+        days = HOURS_DAY
+        hours = DAYS_WEEK
         self._schedule = [[None] * hours for indx in range(days)]
 
     """python < 3.3 does not allow generator to return"""
+
     @coroutine
     def populate_schedule(self):
         while True:
