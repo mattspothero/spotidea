@@ -2,6 +2,7 @@ from facility.coroutil import coroutine
 from facility.dayTimesRate import DayTimesRate
 
 
+
 class DayTimesRateBuilder(object):
     def __init__(self):
         days = 7

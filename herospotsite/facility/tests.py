@@ -64,6 +64,7 @@ class DayParserTest(unittest.TestCase):
 
         test_schedule = rate_parser.schedule
         for hr_indx in range(0, 24):
+            '''test monday'''
             time_slot = test_schedule[0][hr_indx]
             if hr_indx in [0, 6, 7, 8, 22, 23]:
                 self.assertEqual(time_slot, None)
@@ -71,3 +72,21 @@ class DayParserTest(unittest.TestCase):
                 self.assertEqual(time_slot.price, 1000)
             else:
                 self.assertEqual(time_slot.price, 1500)
+
+            '''test saturday'''
+            time_slot = test_schedule[5][hr_indx]
+            if hr_indx in [0, 6, 7, 8, 22, 23]:
+                self.assertEqual(time_slot, None)
+            elif hr_indx in [1, 2, 3, 4, 5]:
+                self.assertEqual(time_slot.price, 1000)
+            else:
+                self.assertEqual(time_slot.price, 2000)
+
+            '''test wednesday'''
+            time_slot = test_schedule[2][hr_indx]
+            if hr_indx in [0, 19, 20, 21, 22, 23]:
+                self.assertEqual(time_slot, None)
+            elif hr_indx in [1, 2, 3, 4, 5]:
+                self.assertEqual(time_slot.price, 1000)
+            else:
+                self.assertEqual(time_slot.price, 1750)
